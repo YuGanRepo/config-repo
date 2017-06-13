@@ -1,1 +1,15 @@
-
+dev:
+  spring:
+    application:
+      name: microservice-discovery
+  server:
+    port: 8001
+  context-path: /discovery
+  eureka: 
+    instance: 
+      hostname: discovery
+    client:
+      registerWithEureka: false
+      fetchRegistry: false
+      serviceUrl: 
+        defaultZone: http://${dev.eureka.instance.hostname}:${dev.server.port}/eureka/
