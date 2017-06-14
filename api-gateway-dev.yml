@@ -1,0 +1,32 @@
+dev:
+  spring:
+    application:
+      name: api-gateway
+    datasource:
+      url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8
+      username: root
+      password: ganyu
+      hikari:
+        connection-test-query: select 1 from dual
+        connection-timeout: 30000
+        idle-timeout: 60000
+        max-lifetime: 1800000
+        maximum-pool-size: 100
+        minimum-idle: 100
+  server:
+    port: 7000
+  eureka: 
+    instance: 
+      prefer-ip-address: true
+    client:
+      serviceUrl: 
+        defaultZone: http://localhost:${dev.server.port}/eureka/
+  mybatis:
+    mapper-locations:
+    - classpath*:sqlmap/*.xml
+    type-aliases-package: com.bayin.domain
+  zuul:
+    routes:
+      microservice-books:
+        path: /api-gateway/v1/**
+
